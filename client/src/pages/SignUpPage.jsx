@@ -10,7 +10,7 @@ function SignUpPage() {
       <section className="flex-1 flex flex-col md:justify-center items-center gap-4 p-2">
         <p className="font-anton text-lg md:text-2xl">Create An Account</p>
 
-        <form className="flex flex-col gap-4 w-full md:max-w-3xl">
+        <form className="flex flex-col gap-4 w-full md:max-w-xl">
           <div className="flex flex-col gap-2">
             <label className="font-anton md:text-lg">USERNAME</label>
             <input
