@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function Onboarding() {
   return (
     <main className="p-2 flex flex-col h-screen">
@@ -15,10 +17,13 @@ function Onboarding() {
         </div>
 
         <div className="flex gap-4">
-          <button className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm cursor-pointer">
+          <Link
+            to="/signup"
+            className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm text-center cursor-pointer"
+          >
             Sign Up
-          </button>
-          <button className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm cursor-pointer">
+          </Link>
+          <button className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm text-center cursor-pointer">
             Login
           </button>
         </div>
