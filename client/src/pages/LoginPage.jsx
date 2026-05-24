@@ -1,6 +1,13 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function LoginPage() {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
+
   return (
     <main className="p-2 flex flex-col gap-10 md:gap-0 h-screen">
       <header>
@@ -10,7 +17,10 @@ function LoginPage() {
       <section className="flex-1 flex flex-col md:justify-center items-center gap-4 p-2">
         <p className="font-anton text-lg md:text-2xl">Create An Account</p>
 
-        <form className="flex flex-col gap-4 w-full md:max-w-xl">
+        <form
+          className="flex flex-col gap-4 w-full md:max-w-xl"
+          onSubmit={handleLogin}
+        >
           <div className="flex flex-col gap-2">
             <label className="font-anton md:text-lg">EMAIL</label>
             <input
