@@ -8,7 +8,7 @@ function Sidebar({ user, setSidebar }) {
     {
       name: "Profile",
       icon: <User size={22} />,
-      route: "/",
+      route: "/profile",
     },
     {
       name: "Chats",
@@ -24,7 +24,7 @@ function Sidebar({ user, setSidebar }) {
 
   return (
     <aside
-      className="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-md"
+      className="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-md z-10"
       onClick={() => setSidebar(false)}
     >
       <div
@@ -49,7 +49,7 @@ function Sidebar({ user, setSidebar }) {
               return (
                 <li
                   key={index}
-                  className={`${location.pathname === item.route ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl"} font-semibold p-2 rounded-sm cursor-pointer`}
+                  className={`${location.pathname.startsWith(item.route) ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl"} font-semibold p-2 rounded-sm cursor-pointer`}
                 >
                   <Link className="flex items-center gap-2" to={item.route}>
                     {item.icon}
