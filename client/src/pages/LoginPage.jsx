@@ -36,7 +36,10 @@ function LoginPage() {
         </form>
 
         <p className="text-center">
-          new here? <Link className="underline">Sign Up</Link>
+          new here?{" "}
+          <Link to="/signup" className="underline">
+            Sign Up
+          </Link>
         </p>
       </section>
     </main>

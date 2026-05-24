@@ -52,7 +52,10 @@ function SignUpPage() {
         </form>
 
         <p className="text-center">
-          already have an account? <Link className="underline">Log in</Link>
+          already have an account?{" "}
+          <Link to="/login" className="underline">
+            Log in
+          </Link>
         </p>
       </section>
     </main>
