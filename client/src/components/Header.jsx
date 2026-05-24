@@ -1,12 +1,13 @@
 import { Menu } from "lucide-react";
-import { user } from "../constants/userData";
 
-function Header() {
+function Header({ user, setSidebar }) {
   return (
     <header className="flex p-2 items-center">
-      <button className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex md:hidden items-center justify-center rounded-full cursor-pointer">
+      <button
+        className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex md:hidden items-center justify-center rounded-full cursor-pointer"
+        onClick={() => setSidebar(true)}
+      >
         <Menu />
-        {/* 123456789 */}
       </button>
       <div className="flex-1">
         <h1 className="font-anton text-4xl md:text-5xl text-center">Aura</h1>
