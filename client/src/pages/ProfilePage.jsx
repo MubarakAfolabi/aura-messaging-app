@@ -1,4 +1,4 @@
-import { useOutletContext, Link } from "react-router";
+import { useOutletContext, Link, Outlet } from "react-router";
 import { Users, UserCheck, User } from "lucide-react";
 
 function ProfilePage() {
@@ -23,7 +23,7 @@ function ProfilePage() {
   ];
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 p-2">
       <div>
         <h2 className="font-anton text-lg md:text-2xl text-center">Profile</h2>
       </div>
@@ -58,6 +58,10 @@ function ProfilePage() {
           })}
         </ul>
       </nav>
+
+      <div className="px-4">
+        <Outlet />
+      </div>
     </div>
   );
 }
