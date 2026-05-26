@@ -13,8 +13,10 @@ function GroupsList() {
                   {item.name.charAt(0)}
                 </div>
                 <div>
-                  {item.name}
-                  {item.members}
+                  <h2>{item.name}</h2>
+                  <p className="text-sm text-secondary">
+                    {item.members} members
+                  </p>
                 </div>
               </div>
 
