@@ -1,8 +1,9 @@
-import { useOutletContext, Link, Outlet } from "react-router";
+import { useOutletContext, Link, Outlet, useLocation } from "react-router";
 import { Users, UserCheck, User } from "lucide-react";
 
 function ProfilePage() {
   const { user } = useOutletContext();
+  const location = useLocation();
 
   const navArr = [
     {
@@ -47,9 +48,12 @@ function ProfilePage() {
             return (
               <li
                 key={index}
-                className={`${location.pathname === item.route ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text px-2" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl w-10"} font-semibold h-10 flex items-center justify-center rounded-full cursor-pointer`}
+                className={`${location.pathname === item.route ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl w-10"} font-semibold h-10 flex items-center justify-center rounded-full cursor-pointer overflow-hidden`}
               >
-                <Link className="flex items-center gap-2" to={item.route}>
+                <Link
+                  className="h-full w-full flex items-center gap-2 px-2"
+                  to={item.route}
+                >
                   {item.icon}
                   {location.pathname === item.route && item.name}
                 </Link>
