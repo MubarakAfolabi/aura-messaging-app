@@ -63,7 +63,7 @@ function ProfilePage() {
         </ul>
       </nav>
 
-      <div className="px-4">
+      <div className="px-2 w-full max-w-2xl self-center">
         <Outlet />
       </div>
     </div>

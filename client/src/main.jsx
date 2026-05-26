@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import AccountSettings from "./components/AccountSettings.jsx";
 import FriendsList from "./components/FriendsList.jsx";
+import GroupsList from "./components/GroupsList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
           {
             path: "/profile/friends",
             element: <FriendsList />,
+          },
+          {
+            path: "/profile/groups",
+            element: <GroupsList />,
           },
         ],
       },
