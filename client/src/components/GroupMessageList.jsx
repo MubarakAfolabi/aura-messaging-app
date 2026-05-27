@@ -1,0 +1,35 @@
+import { groupMessages } from "../constants/groupMessages";
+
+function GroupMessageList() {
+  return (
+    <ul className="bg-white/8 backdrop-blur-xl flex flex-col rounded-md overflow-hidden">
+      {groupMessages.map((item, index) => {
+        return (
+          <li
+            key={item.id}
+            className="font-semibold rounded-sm flex flex-col hover:bg-white/10 cursor-pointer"
+          >
+            <div className="flex items-center gap-2 p-4">
+              <div className="font-bold w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
+                {item.groupName.charAt(0)}
+              </div>
+              <div className="flex-1 flex flex-col">
+                <div className="flex justify-between items-center gap-2">
+                  <h2>{item.groupName}</h2>
+                  <p className="text-sm text-secondary">{item.updatedAt}</p>
+                </div>
+                <p className="text-sm text-secondary">{item.lastMessage}</p>
+              </div>
+            </div>
+
+            {index < groupMessages.length - 1 && (
+              <hr className="border-secondary" />
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+export default GroupMessageList;
