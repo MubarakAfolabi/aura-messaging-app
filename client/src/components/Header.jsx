@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
 
-function Header({ user, setSidebar }) {
+function Header({ userData, setSidebar }) {
   return (
     <header className="flex p-2 items-center md:bg-[hsl(30,20%,8%)]">
       <button
@@ -16,9 +16,9 @@ function Header({ user, setSidebar }) {
       </div>
       <button className="font-bold bg-white/8 backdrop-blur-xl hover:bg-white/10 w-fit md:pr-2 rounded-full flex items-center gap-2 cursor-pointer">
         <div className="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
-          M
+          {userData.username.charAt(0)}
         </div>
-        <p className="hidden md:block">{user.username}</p>
+        <p className="hidden md:block">{userData.username}</p>
       </button>
     </header>
   );

@@ -5,6 +5,7 @@ import { user } from "./constants/userData";
 import { Outlet } from "react-router";
 
 function App() {
+  const [userData, setUserData] = useState(user);
   const [sidebar, setSidebar] = useState(false);
 
   useEffect(() => {
@@ -20,12 +21,12 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen">
-      <Header user={user} setSidebar={setSidebar} />
+      <Header userData={userData} setSidebar={setSidebar} />
       <main className="flex-1 flex">
-        {sidebar && <Sidebar user={user} setSidebar={setSidebar} />}
+        {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
 
         <section className="flex-1">
-          <Outlet context={{ user }} />
+          <Outlet context={{ userData, setUserData }} />
         </section>
       </main>
     </div>

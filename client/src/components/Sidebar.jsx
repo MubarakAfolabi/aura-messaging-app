@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { User, MessageSquare, Users, LogOut } from "lucide-react";
 
-function Sidebar({ user, setSidebar }) {
+function Sidebar({ userData, setSidebar }) {
   const location = useLocation();
 
   const navArr = [
@@ -33,11 +33,11 @@ function Sidebar({ user, setSidebar }) {
       >
         <div className="flex flex-col gap-2">
           <div className="font-bold text-4xl w-20 h-20 rounded-full bg-green-400 flex items-center justify-center">
-            M
+            {userData.username.charAt(0)}
           </div>
           <div>
-            <p className="font-anton text-lg">{user.username}</p>
-            <p className="font-anton text-secondary">{user.email}</p>
+            <p className="font-anton text-lg">{userData.username}</p>
+            <p className="font-anton text-secondary">{userData.email}</p>
           </div>
         </div>
 

@@ -2,7 +2,7 @@ import { useOutletContext, Link, Outlet, useLocation } from "react-router";
 import { Users, UserCheck, User } from "lucide-react";
 
 function ProfilePage() {
-  const { user } = useOutletContext();
+  const { userData } = useOutletContext();
   const location = useLocation();
 
   const navArr = [
@@ -32,12 +32,14 @@ function ProfilePage() {
       <div className="flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-2">
           <div className="font-bold text-4xl w-30 h-30 rounded-full bg-green-400 flex items-center justify-center">
-            M
+            {userData.username.charAt(0)}
           </div>
           <div>
-            <p className="font-anton text-lg">{user.username}</p>
-            <p className="font-anton text-secondary">{user.email}</p>
-            <p className="text-secondary">No Bio</p>
+            <p className="font-anton text-lg">{userData.username}</p>
+            <p className="font-anton text-secondary">{userData.email}</p>
+            <p className="text-secondary">
+              {userData.bio.trim().length > 0 ? userData.bio : "No Bio"}
+            </p>
           </div>
         </div>
       </div>
