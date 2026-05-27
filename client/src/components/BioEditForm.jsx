@@ -1,10 +1,24 @@
+import { useState } from "react";
+import { useOutletContext } from "react-router";
+
 function BioEditForm({ setModal }) {
+  const { userData, setUserData } = useOutletContext();
+  const [bio, setBio] = useState(userData.bio);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUserData((prev) => ({ ...prev, bio }));
+    setModal(false);
+  };
+
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2">
         <input
           className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
           type="text"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
         />
       </div>
 
