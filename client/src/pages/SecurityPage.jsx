@@ -1,16 +1,15 @@
-import { useState } from "react";
 import EditModal from "../components/EditModal";
 
-function ProfileEdit() {
+import { useState } from "react";
+
+function SecurityPage() {
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
   const navArr = [
     {
-      name: "Username",
-    },
-    {
-      name: "Bio",
+      name: "Change Password",
+      modalType: "Password",
     },
   ];
 
@@ -32,7 +31,7 @@ function ProfileEdit() {
                 className="hover:bg-white/10 flex items-center gap-2 p-4  w-full cursor-pointer"
                 onClick={() => {
                   setModal(true);
-                  setModalType(item.name);
+                  setModalType("Password");
                 }}
               >
                 {item.name}
@@ -46,4 +45,4 @@ function ProfileEdit() {
   );
 }
 
-export default ProfileEdit;
+export default SecurityPage;
