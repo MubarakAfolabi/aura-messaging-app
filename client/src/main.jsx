@@ -12,6 +12,8 @@ import FriendsList from "./components/FriendsList.jsx";
 import GroupsList from "./components/GroupsList.jsx";
 import ProfileEdit from "./pages/ProfileEdit.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
+import ChatsPage from "./pages/ChatsPage.jsx";
+import DirectMessageList from "./components/DirectMessageList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,20 @@ const router = createBrowserRouter([
       {
         path: "/profile/security",
         element: <SecurityPage />,
+      },
+      {
+        path: "/chats",
+        element: <ChatsPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/chats/direct" />,
+          },
+          {
+            path: "/chats/direct",
+            element: <DirectMessageList />,
+          },
+        ],
       },
     ],
   },
