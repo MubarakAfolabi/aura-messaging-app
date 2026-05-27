@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { User, MessageSquare, Users, LogOut } from "lucide-react";
 
 function Sidebar({ userData, setSidebar }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navArr = [
     {
@@ -49,16 +50,21 @@ function Sidebar({ userData, setSidebar }) {
               return (
                 <li
                   key={index}
-                  className={`${location.pathname.startsWith(item.route) ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl"} font-semibold rounded-sm cursor-pointer`}
+                  className={`${location.pathname.startsWith(item.route) ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl"} font-semibold rounded-sm`}
                 >
-                  <Link
-                    className="flex items-center gap-2 h-full w-full p-2 "
-                    to={item.route}
+                  <button
+                    className="flex items-center gap-2 h-full w-full p-2 cursor-pointer"
+                    onClick={() => {
+                      navigate(item.route);
+                      if (window.innerWidth < 768) {
+                        setSidebar(false);
+                      }
+                    }}
                   >
                     {item.icon}
 
                     {item.name}
-                  </Link>
+                  </button>
                 </li>
               );
             })}
