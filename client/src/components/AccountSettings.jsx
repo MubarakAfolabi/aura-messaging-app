@@ -1,4 +1,4 @@
-import { Pencil } from "lucide-react";
+import { Pencil, RectangleEllipsis } from "lucide-react";
 import { Link } from "react-router";
 
 function AccountSettings() {
@@ -7,6 +7,11 @@ function AccountSettings() {
       name: "Edit Profile",
       icon: <Pencil size={22} />,
       route: "/profile/edit",
+    },
+    {
+      name: "Change Password",
+      icon: <RectangleEllipsis size={22} />,
+      route: "/profile/change-password",
     },
   ];
 

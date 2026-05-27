@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import AccountSettings from "./components/AccountSettings.jsx";
 import FriendsList from "./components/FriendsList.jsx";
 import GroupsList from "./components/GroupsList.jsx";
+import ProfileEdit from "./pages/ProfileEdit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             element: <GroupsList />,
           },
         ],
+      },
+      {
+        path: "/profile/edit",
+        element: <ProfileEdit />,
       },
     ],
   },
