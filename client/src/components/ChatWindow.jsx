@@ -1,12 +1,15 @@
 import { useNavigate, useParams } from "react-router";
 import { directMessages } from "../constants/directMessages";
 import { SendHorizontal, ArrowLeft } from "lucide-react";
+import { groupMessages } from "../constants/groupMessages";
 
 function ChatWindow({ type }) {
   const { chatId } = useParams();
   const navigate = useNavigate();
 
-  const chat = directMessages.find((item) => item.id === Number(chatId));
+  const messages = type === "direct" ? directMessages : groupMessages;
+
+  const chat = messages.find((item) => item.id === Number(chatId));
 
   return (
     <div className="h-full flex flex-col relative">
@@ -16,15 +19,19 @@ function ChatWindow({ type }) {
           onClick={() =>
             type === "direct"
               ? navigate("/chats/direct")
-              : navigate("chats/groups")
+              : navigate("/chats/groups")
           }
         >
           <ArrowLeft size={22} />
         </button>
         <div className="font-bold w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
-          {chat.username.charAt(0)}
+          {type === "direct"
+            ? chat.username.charAt(0)
+            : chat.groupName.charAt(0)}
         </div>
-        <h2 className="font-anton">{chat.username}</h2>
+        <h2 className="font-anton">
+          {type === "direct" ? chat.username : chat.groupName}
+        </h2>
       </div>
 
       <div className="flex-1 overflow-y-auto mb-15">
@@ -35,6 +42,11 @@ function ChatWindow({ type }) {
                 className={`${item.senderId !== 0 ? "bg-white/8 hover:bg-white/10 backdrop-blur-xl rounded-br-md" : "bg-primary-button text-primary-button-text rounded-bl-md self-end"} flex flex-col gap-2 w-fit max-w-2xs px-4 py-2 rounded-t-md`}
                 key={item.id}
               >
+                {type === "group" && item.senderId !== 0 && (
+                  <p className="text-xs text-semibold text-secondary">
+                    {item.username}
+                  </p>
+                )}
                 <p>{item.text}</p>
                 <p
                   className={`${item.senderId !== 0 ? "" : "self-end"} text-sm`}

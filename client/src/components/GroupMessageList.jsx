@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { groupMessages } from "../constants/groupMessages";
 
 function GroupMessageList() {
@@ -9,7 +10,10 @@ function GroupMessageList() {
             key={item.id}
             className="font-semibold rounded-sm flex flex-col hover:bg-white/10 cursor-pointer"
           >
-            <div className="flex items-center gap-2 p-4">
+            <Link
+              className="flex items-center gap-2 p-4"
+              to={`/chats/groups/${item.id}`}
+            >
               <div className="font-bold w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
                 {item.groupName.charAt(0)}
               </div>
@@ -20,7 +24,7 @@ function GroupMessageList() {
                 </div>
                 <p className="text-sm text-secondary">{item.lastMessage}</p>
               </div>
-            </div>
+            </Link>
 
             {index < groupMessages.length - 1 && (
               <hr className="border-secondary" />

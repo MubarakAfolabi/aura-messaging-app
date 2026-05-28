@@ -20,7 +20,9 @@ function ChatsPage() {
 
   const isDirect = location.pathname.includes("/chats/direct");
   const isGroups = location.pathname.includes("/chats/groups");
-  const isChatOpen = /^\/chats\/direct\/[^/]+$/.test(location.pathname);
+  const isChatOpen =
+    /^\/chats\/direct\/[^/]+$/.test(location.pathname) ||
+    /^\/chats\/groups\/[^/]+$/.test(location.pathname);
 
   return (
     <div className="overflow-hidden flex h-full">
