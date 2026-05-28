@@ -16,13 +16,17 @@ function ChatsPage() {
     },
   ];
 
+  const isChatOpen = /^\/chats\/direct\/[^/]+$/.test(location.pathname);
+
   return (
     <div className="flex flex-col gap-5 p-2">
-      <div>
+      <div className={`${isChatOpen ? "hidden lg:block" : "block"}`}>
         <h2 className="font-anton text-lg md:text-2xl text-center">Chats</h2>
       </div>
 
-      <nav className="flex justify-center">
+      <nav
+        className={`${isChatOpen ? "hidden lg:flex" : "flex"} justify-center`}
+      >
         <ul className="flex gap-2">
           {navArr.map((item, index) => {
             return (

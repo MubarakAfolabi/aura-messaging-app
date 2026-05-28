@@ -1,11 +1,16 @@
 import { Menu } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 function Header({ userData, setSidebar }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isChatOpen = /^\/chats\/direct\/[^/]+$/.test(location.pathname);
 
   return (
-    <header className="flex p-2 items-center md:bg-[hsl(30,20%,8%)]">
+    <header
+      className={`${isChatOpen ? "hidden lg:flex" : "flex"} p-2 items-center md:bg-[hsl(30,20%,8%)]`}
+    >
       <button
         className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex md:hidden items-center justify-center rounded-full cursor-pointer"
         onClick={() => setSidebar(true)}

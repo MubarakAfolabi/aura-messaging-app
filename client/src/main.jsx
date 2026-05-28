@@ -13,8 +13,9 @@ import GroupsList from "./components/GroupsList.jsx";
 import ProfileEdit from "./pages/ProfileEdit.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
 import ChatsPage from "./pages/ChatsPage.jsx";
-import DirectMessageList from "./components/DirectMessageList.jsx";
 import GroupMessageList from "./components/GroupMessageList.jsx";
+import ChatWindow from "./components/ChatWindow.jsx";
+import DirectMessageLayout from "./components/DirectMessagesLayout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,7 +62,13 @@ const router = createBrowserRouter([
           },
           {
             path: "/chats/direct",
-            element: <DirectMessageList />,
+            element: <DirectMessageLayout />,
+            children: [
+              {
+                path: "/chats/direct/:chatId",
+                element: <ChatWindow type="direct" />,
+              },
+            ],
           },
           {
             path: "/chats/groups",
