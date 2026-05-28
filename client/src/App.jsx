@@ -20,9 +20,9 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col h-screen overflow-hidden md:gap-4 md:pb-4">
       <Header userData={userData} setSidebar={setSidebar} />
-      <main className="flex-1 flex overflow-hidden">
+      <main className="flex-1 flex md:gap-4 md:mr-4 overflow-hidden">
         {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
 
         <section className="flex-1 overflow-hidden">

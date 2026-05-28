@@ -25,11 +25,11 @@ function Sidebar({ userData, setSidebar }) {
 
   return (
     <aside
-      className="fixed md:static top-0 left-0 bottom-0 right-0 backdrop-blur-md z-10 md:h-full md:w-[clamp(16rem,22vw,22rem)]"
+      className="fixed md:static top-0 left-0 bottom-0 right-0 backdrop-blur-md z-10 md:h-full md:w-[clamp(16rem,22vw,22rem)] md:ml-4"
       onClick={() => setSidebar(false)}
     >
       <div
-        className="bg-[hsl(30,20%,8%)] h-full w-[70%] p-4 py-10 flex flex-col gap-4 md:w-full"
+        className="bg-[hsl(30,20%,8%)] h-full w-[70%] p-4 py-10 flex flex-col gap-4 md:w-full md:rounded-md"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col gap-2">

@@ -11,7 +11,7 @@ function Header({ userData, setSidebar }) {
 
   return (
     <header
-      className={`${isChatOpen ? "hidden md:flex" : "flex"} p-2 items-center md:bg-[hsl(30,20%,8%)]`}
+      className={`${isChatOpen ? "hidden md:flex" : "flex"} py-2 px-4 items-center md:bg-[hsl(30,20%,8%)]`}
     >
       <button
         className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex md:hidden items-center justify-center rounded-full cursor-pointer"

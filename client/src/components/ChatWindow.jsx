@@ -48,8 +48,8 @@ function ChatWindow({ type }) {
   };
 
   return (
-    <div className="h-full flex flex-col overflow-hidden relative">
-      <div className="bg-[hsl(30,20%,8%)] p-2 flex items-center gap-2">
+    <div className="h-full flex flex-col overflow-hidden relative bg-[hsl(30,20%,8%)]">
+      <div className="bg-[hsl(26,9%,15%)] p-2 flex items-center gap-2">
         <button
           className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex lg:hidden items-center justify-center rounded-full cursor-pointer"
           onClick={() =>

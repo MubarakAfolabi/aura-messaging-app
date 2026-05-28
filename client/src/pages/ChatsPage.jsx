@@ -31,11 +31,11 @@ function ChatsPage() {
     /^\/chats\/groups\/[^/]+$/.test(location.pathname);
 
   return (
-    <div className="overflow-hidden flex h-full">
+    <div className="overflow-hidden flex md:gap-4 h-full">
       <div
         className={`flex flex-col flex-1 gap-5 p-2 ${
           isChatOpen ? "hidden lg:flex" : ""
-        } lg:bg-[hsl(30,20%,8%)]`}
+        } lg:bg-[hsl(30,20%,8%)] rounded-md`}
       >
         <div className="p-2">
           <h2 className="font-anton text-lg md:text-2xl text-center">Chats</h2>
@@ -74,7 +74,9 @@ function ChatsPage() {
         </div>
       )}
 
-      <div className={`${isChatOpen ? "" : "hidden"} flex-2`}>
+      <div
+        className={`${isChatOpen ? "" : "hidden"} flex-2 rounded-md overflow-hidden`}
+      >
         <Outlet
           context={{ directChats, setDirectChats, groupChats, setGroupChats }}
         />
