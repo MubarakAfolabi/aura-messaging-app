@@ -1,6 +1,6 @@
 import { useNavigate, useOutletContext, useParams } from "react-router";
 import { SendHorizontal, ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function ChatWindow({ type }) {
   const { chatId } = useParams();
@@ -29,7 +29,7 @@ function ChatWindow({ type }) {
       senderId: 0,
       username: "You",
       text: message,
-      createdAt: "Now",
+      createdAt: Date.now(),
     };
 
     setChats((prev) =>
@@ -46,6 +46,12 @@ function ChatWindow({ type }) {
 
     setMessage("");
   };
+
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
 
   return (
     <div className="h-full flex flex-col overflow-hidden relative bg-[hsl(30,20%,8%)]">
@@ -92,6 +98,8 @@ function ChatWindow({ type }) {
               </li>
             );
           })}
+
+          <div ref={bottomRef} />
         </ul>
       </div>
 

@@ -1,10 +1,7 @@
 import { MessageCircle, Users } from "lucide-react";
-import { Link, Outlet, useLocation } from "react-router";
+import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import DirectMessageList from "../components/DirectMessageList";
 import GroupMessageList from "../components/GroupMessageList";
-import { directMessages } from "../constants/directMessages";
-import { groupMessages } from "../constants/groupMessages";
-import { useState } from "react";
 
 function ChatsPage() {
   const location = useLocation();
@@ -21,8 +18,8 @@ function ChatsPage() {
     },
   ];
 
-  const [directChats, setDirectChats] = useState(directMessages);
-  const [groupChats, setGroupChats] = useState(groupMessages);
+  const { directChats, setDirectChats, groupChats, setGroupChats } =
+    useOutletContext();
 
   const isDirect = location.pathname.includes("/chats/direct");
   const isGroups = location.pathname.includes("/chats/groups");
@@ -78,7 +75,12 @@ function ChatsPage() {
         className={`${isChatOpen ? "" : "hidden"} flex-2 rounded-md overflow-hidden`}
       >
         <Outlet
-          context={{ directChats, setDirectChats, groupChats, setGroupChats }}
+          context={{
+            directChats,
+            setDirectChats,
+            groupChats,
+            setGroupChats,
+          }}
         />
       </div>
     </div>

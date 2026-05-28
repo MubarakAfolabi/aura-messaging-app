@@ -3,10 +3,15 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { user } from "./constants/userData";
 import { Outlet } from "react-router";
+import { directMessages } from "./constants/directMessages";
+import { groupMessages } from "./constants/groupMessages";
 
 function App() {
   const [userData, setUserData] = useState(user);
   const [sidebar, setSidebar] = useState(false);
+
+  const [directChats, setDirectChats] = useState(directMessages);
+  const [groupChats, setGroupChats] = useState(groupMessages);
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,7 +31,16 @@ function App() {
         {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
 
         <section className="flex-1 overflow-hidden">
-          <Outlet context={{ userData, setUserData }} />
+          <Outlet
+            context={{
+              userData,
+              setUserData,
+              directChats,
+              setDirectChats,
+              groupChats,
+              setGroupChats,
+            }}
+          />
         </section>
       </main>
     </div>
