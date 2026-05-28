@@ -24,7 +24,7 @@ function LoginPage() {
           <div className="flex flex-col gap-2">
             <label className="font-anton md:text-lg">EMAIL</label>
             <input
-              className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
+              className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg"
               type="email"
             />
           </div>

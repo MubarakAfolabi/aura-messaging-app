@@ -22,7 +22,13 @@ export const directMessages = [
       {
         id: 3,
         senderId: 1,
-        text: "Nothing much",
+        text: "Nothing much lorem ipsum jewjw efwnefwef fefnwefnwf ewofwnfwefwn",
+        createdAt: "11:58 PM",
+      },
+      {
+        id: 3,
+        senderId: 0,
+        text: "Nothing much lorem ipsum jewjw efwnefwef fefnwefnwf ewofwnfwefwn",
         createdAt: "11:58 PM",
       },
     ],
