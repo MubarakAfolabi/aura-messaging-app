@@ -1,16 +1,26 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { directMessages } from "../constants/directMessages";
-import { SendHorizontal } from "lucide-react";
+import { SendHorizontal, ArrowLeft } from "lucide-react";
 
 function ChatWindow({ type }) {
   const { chatId } = useParams();
+  const navigate = useNavigate();
 
   const chat = directMessages.find((item) => item.id === Number(chatId));
-  console.log(chat);
 
   return (
-    <div className="h-screen flex flex-col relative lg:h-full">
+    <div className="h-full flex flex-col relative">
       <div className="bg-[hsl(30,20%,8%)] p-2 flex items-center gap-2">
+        <button
+          className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex lg:hidden items-center justify-center rounded-full cursor-pointer"
+          onClick={() =>
+            type === "direct"
+              ? navigate("/chats/direct")
+              : navigate("chats/groups")
+          }
+        >
+          <ArrowLeft size={22} />
+        </button>
         <div className="font-bold w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
           {chat.username.charAt(0)}
         </div>

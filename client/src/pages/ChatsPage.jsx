@@ -23,26 +23,30 @@ function ChatsPage() {
   const isChatOpen = /^\/chats\/direct\/[^/]+$/.test(location.pathname);
 
   return (
-    <div>
-      <div className="flex flex-col gap-5 h-screen overflow-hidden">
-        <div className={` p-2`}>
+    <div className="overflow-hidden flex h-full">
+      <div
+        className={`flex flex-col flex-1 gap-5 p-2 ${
+          isChatOpen ? "hidden lg:flex" : ""
+        } lg:bg-[hsl(30,20%,8%)]`}
+      >
+        <div className="p-2">
           <h2 className="font-anton text-lg md:text-2xl text-center">Chats</h2>
         </div>
 
-        <nav className={`flex justify-center p-2`}>
+        <nav className="flex justify-center p-2">
           <ul className="flex gap-2">
             {navArr.map((item, index) => {
               return (
                 <li
                   key={index}
-                  className={`${location.pathname === item.route ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl w-10"} font-semibold h-10 flex items-center justify-center rounded-full cursor-pointer overflow-hidden`}
+                  className={`${location.pathname.includes(item.route) ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl w-10"} font-semibold h-10 flex items-center justify-center rounded-full cursor-pointer overflow-hidden`}
                 >
                   <Link
                     className="h-full w-full flex items-center gap-2 px-2"
                     to={item.route}
                   >
                     {item.icon}
-                    {location.pathname === item.route && item.name}
+                    {location.pathname.includes(item.route) && item.name}
                   </Link>
                 </li>
               );
@@ -56,7 +60,13 @@ function ChatsPage() {
         </div>
       </div>
 
-      <div>
+      {!isChatOpen && !isChatOpen && (
+        <div className="hidden lg:flex flex-2 items-center justify-center text-secondary">
+          Select a chat
+        </div>
+      )}
+
+      <div className={`${isChatOpen ? "" : "hidden"} flex-2`}>
         <Outlet />
       </div>
     </div>
