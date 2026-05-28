@@ -1,15 +1,51 @@
-import { useNavigate, useParams } from "react-router";
-import { directMessages } from "../constants/directMessages";
+import { useNavigate, useOutletContext, useParams } from "react-router";
 import { SendHorizontal, ArrowLeft } from "lucide-react";
-import { groupMessages } from "../constants/groupMessages";
+import { useState } from "react";
 
 function ChatWindow({ type }) {
   const { chatId } = useParams();
   const navigate = useNavigate();
 
-  const messages = type === "direct" ? directMessages : groupMessages;
+  const { directChats, setDirectChats, groupChats, setGroupChats } =
+    useOutletContext();
+
+  const messages = type === "direct" ? directChats : groupChats;
+
+  const setChats = type === "direct" ? setDirectChats : setGroupChats;
 
   const chat = messages.find((item) => item.id === Number(chatId));
+
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!message.trim()) {
+      return;
+    }
+
+    const newMessage = {
+      id: Date.now(),
+      senderId: 0,
+      username: "You",
+      text: message,
+      createdAt: "Now",
+    };
+
+    setChats((prev) =>
+      prev.map((item) =>
+        item.id === Number(chatId)
+          ? {
+              ...item,
+              lastMessage: message,
+              messages: [...item.messages, newMessage],
+            }
+          : item,
+      ),
+    );
+
+    setMessage("");
+  };
 
   return (
     <div className="h-full flex flex-col relative">
@@ -59,12 +95,17 @@ function ChatWindow({ type }) {
         </ul>
       </div>
 
-      <form className="p-2 bg-[hsl(30,20%,8%)] flex items-center gap-4 absolute bottom-0 left-0 right-0">
+      <form
+        className="p-2 bg-[hsl(30,20%,8%)] flex items-center gap-4 absolute bottom-0 left-0 right-0"
+        onSubmit={handleSubmit}
+      >
         <div className="flex-1">
           <input
             className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
             type="text"
             placeholder="Write a message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
         </div>
 
