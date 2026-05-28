@@ -20,12 +20,12 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header userData={userData} setSidebar={setSidebar} />
-      <main className="flex-1 flex">
+      <main className="flex-1 flex overflow-hidden">
         {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
 
-        <section className="flex-1">
+        <section className="flex-1 overflow-hidden">
           <Outlet context={{ userData, setUserData }} />
         </section>
       </main>

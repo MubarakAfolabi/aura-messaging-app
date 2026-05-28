@@ -5,7 +5,9 @@ function Header({ userData, setSidebar }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isChatOpen = /^\/chats\/direct\/[^/]+$/.test(location.pathname);
+  const isChatOpen =
+    /^\/chats\/direct\/[^/]+$/.test(location.pathname) ||
+    /^\/chats\/groups\/[^/]+$/.test(location.pathname);
 
   return (
     <header

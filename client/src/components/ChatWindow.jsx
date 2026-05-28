@@ -48,7 +48,7 @@ function ChatWindow({ type }) {
   };
 
   return (
-    <div className="h-full flex flex-col relative">
+    <div className="h-full flex flex-col overflow-hidden relative">
       <div className="bg-[hsl(30,20%,8%)] p-2 flex items-center gap-2">
         <button
           className="shrink-0 bg-white/8 backdrop-blur-xl hover:bg-white/10 h-10 w-10 flex lg:hidden items-center justify-center rounded-full cursor-pointer"
@@ -75,7 +75,7 @@ function ChatWindow({ type }) {
           {chat.messages.map((item) => {
             return (
               <li
-                className={`${item.senderId !== 0 ? "bg-white/8 hover:bg-white/10 backdrop-blur-xl rounded-br-md" : "bg-primary-button text-primary-button-text rounded-bl-md self-end"} flex flex-col gap-2 w-fit max-w-2xs px-4 py-2 rounded-t-md`}
+                className={`${item.senderId !== 0 ? "bg-white/8 hover:bg-white/10 backdrop-blur-xl rounded-br-md" : "bg-primary-button text-primary-button-text rounded-bl-md self-end"} flex flex-col gap-2 w-fit max-w-2xs px-4 py-2 rounded-t-md wrap-break-word`}
                 key={item.id}
               >
                 {type === "group" && item.senderId !== 0 && (
