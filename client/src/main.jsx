@@ -14,6 +14,7 @@ import ProfileEdit from "./pages/ProfileEdit.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
 import ChatsPage from "./pages/ChatsPage.jsx";
 import ChatWindow from "./components/ChatWindow.jsx";
+import RequestsPage from "./pages/RequestsPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
             element: <ChatWindow type="group" />,
           },
         ],
+      },
+      {
+        path: "requests",
+        element: <RequestsPage />,
       },
     ],
   },

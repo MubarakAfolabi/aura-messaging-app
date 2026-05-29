@@ -32,7 +32,7 @@ function ChatsPage() {
       <div
         className={`flex flex-col flex-1 gap-5 p-2 ${
           isChatOpen ? "hidden lg:flex" : ""
-        } lg:bg-[hsl(30,20%,8%)] rounded-md`}
+        } bg-[hsl(30,20%,8%)] rounded-md`}
       >
         <div className="p-2">
           <h2 className="font-anton text-lg md:text-2xl text-center">Chats</h2>
@@ -66,7 +66,7 @@ function ChatsPage() {
       </div>
 
       {!isChatOpen && !isChatOpen && (
-        <div className="hidden lg:flex flex-2 items-center justify-center text-secondary">
+        <div className="bg-[hsl(30,20%,8%)] rounded-md hidden lg:flex flex-2 items-center justify-center text-secondary">
           Select a chat
         </div>
       )}
