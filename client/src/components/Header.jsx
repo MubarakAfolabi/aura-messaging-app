@@ -32,9 +32,9 @@ function Header({ userData, setSidebar }) {
         onClick={() => navigate("/")}
       >
         <div className="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
-          {userData.username.charAt(0)}
+          {userData?.username.charAt(0)}
         </div>
-        <p className="hidden md:block">{userData.username}</p>
+        <p className="hidden md:block">{userData?.username}</p>
       </button>
     </header>
   );
