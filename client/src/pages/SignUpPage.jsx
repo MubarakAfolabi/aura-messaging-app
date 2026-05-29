@@ -1,6 +1,35 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function SignUpPage() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [responseData, setResponseData] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ username, email, password, confirmPassword }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setResponseData(data);
+
+        if (data.success) {
+          navigate("/login");
+        }
+      });
+  };
+
   return (
     <main className="p-2 flex flex-col gap-10 md:gap-0 h-screen">
       <header>
@@ -10,12 +39,21 @@ function SignUpPage() {
       <section className="flex-1 flex flex-col md:justify-center items-center gap-4 p-2">
         <p className="font-anton text-lg md:text-2xl">Create An Account</p>
 
-        <form className="flex flex-col gap-4 w-full md:max-w-xl">
+        {!responseData?.success && (
+          <p className="text-red-500">{responseData?.message}</p>
+        )}
+
+        <form
+          className="flex flex-col gap-4 w-full md:max-w-xl"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col gap-2">
             <label className="font-anton md:text-lg">USERNAME</label>
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
               type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
@@ -24,6 +62,8 @@ function SignUpPage() {
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -32,6 +72,8 @@ function SignUpPage() {
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -40,6 +82,8 @@ function SignUpPage() {
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
               type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
 
