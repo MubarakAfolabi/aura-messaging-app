@@ -15,6 +15,8 @@ import SecurityPage from "./pages/SecurityPage.jsx";
 import ChatsPage from "./pages/ChatsPage.jsx";
 import ChatWindow from "./components/chats/ChatWindow.jsx";
 import RequestsPage from "./pages/RequestsPage.jsx";
+import SentRequestList from "./components/requests/SentRequestList.jsx";
+import ReceivedRequestList from "./components/requests/ReceivedRequestList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +82,20 @@ const router = createBrowserRouter([
       {
         path: "requests",
         element: <RequestsPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="sent" />,
+          },
+          {
+            path: "sent",
+            element: <SentRequestList />,
+          },
+          {
+            path: "received",
+            element: <ReceivedRequestList />,
+          },
+        ],
       },
     ],
   },

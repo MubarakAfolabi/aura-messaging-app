@@ -1,16 +1,18 @@
 import { UserPlus, UserCheck } from "lucide-react";
-import { Link } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 
 function RequestsPage() {
+  const location = useLocation();
+
   const navArr = [
     {
       name: "Sent",
-      route: "/requests",
+      route: "/requests/sent",
       icon: <UserPlus size={22} />,
     },
     {
       name: "Received",
-      route: "/request/received",
+      route: "/requests/received",
       icon: <UserCheck size={22} />,
     },
   ];
@@ -41,6 +43,10 @@ function RequestsPage() {
           })}
         </ul>
       </nav>
+
+      <div className="px-2 w-full max-w-2xl self-center">
+        <Outlet />
+      </div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ function ProfileEdit() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 p-2">
+    <div className="flex flex-col gap-5 p-2 bg-[hsl(30,20%,8%)] h-full rounded-md">
       {modal && <EditModal setModal={setModal} modalType={modalType} />}
 
       <div>
