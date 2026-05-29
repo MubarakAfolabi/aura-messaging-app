@@ -14,7 +14,6 @@ const updateUsernamePost = [
   validateUsername,
   async (req, res) => {
     const id = req.user.id;
-    console.log(id);
     try {
       const errors = validationResult(req);
 
@@ -27,10 +26,12 @@ const updateUsernamePost = [
 
       const { username } = matchedData(req);
 
-      await queries.updateUsernameById(id, username);
-      return res
-        .status(200)
-        .json({ success: true, message: "Username updated successfully" });
+      const user = await queries.updateUsernameById(id, username);
+      return res.status(200).json({
+        success: true,
+        user,
+        message: "Username updated successfully",
+      });
     } catch (err) {
       return res.status(400).json({ success: false, message: err.message });
     }
