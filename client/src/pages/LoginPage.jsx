@@ -15,7 +15,7 @@ function LoginPage() {
       </header>
 
       <section className="flex-1 flex flex-col md:justify-center items-center gap-4 p-2">
-        <p className="font-anton text-lg md:text-2xl">Create An Account</p>
+        <p className="font-anton text-lg md:text-2xl">Login</p>
 
         <form
           className="flex flex-col gap-4 w-full md:max-w-xl"
