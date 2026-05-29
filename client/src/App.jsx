@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import { Outlet, useNavigate } from "react-router";
 import { directMessages } from "./constants/directMessages";
 import { groupMessages } from "./constants/groupMessages";
+import ProtectedRoute from "./components/ProtectedRoute";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
@@ -51,25 +52,27 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden md:gap-4 md:pb-4">
-      <Header userData={userData} setSidebar={setSidebar} />
-      <main className="flex-1 flex md:gap-4 md:mr-4 overflow-hidden">
-        {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
+    <ProtectedRoute>
+      <div className="flex flex-col h-screen overflow-hidden md:gap-4 md:pb-4">
+        <Header userData={userData} setSidebar={setSidebar} />
+        <main className="flex-1 flex md:gap-4 md:mr-4 overflow-hidden">
+          {sidebar && <Sidebar userData={userData} setSidebar={setSidebar} />}
 
-        <section className="flex-1 overflow-hidden">
-          <Outlet
-            context={{
-              userData,
-              setUserData,
-              directChats,
-              setDirectChats,
-              groupChats,
-              setGroupChats,
-            }}
-          />
-        </section>
-      </main>
-    </div>
+          <section className="flex-1 overflow-hidden">
+            <Outlet
+              context={{
+                userData,
+                setUserData,
+                directChats,
+                setDirectChats,
+                groupChats,
+                setGroupChats,
+              }}
+            />
+          </section>
+        </main>
+      </div>
+    </ProtectedRoute>
   );
 }
 
