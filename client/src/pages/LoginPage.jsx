@@ -1,11 +1,32 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [responseData, setResponseData] = useState(null);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate("/");
+
+    fetch(`${API_URL}/login`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setResponseData(data);
+
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        }
+      });
   };
 
   return (
@@ -17,6 +38,10 @@ function LoginPage() {
       <section className="flex-1 flex flex-col md:justify-center items-center gap-4 p-2">
         <p className="font-anton text-lg md:text-2xl">Login</p>
 
+        {!responseData?.success && (
+          <p className="text-red-500">{responseData?.message}</p>
+        )}
+
         <form
           className="flex flex-col gap-4 w-full md:max-w-xl"
           onSubmit={handleLogin}
@@ -26,6 +51,8 @@ function LoginPage() {
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg"
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -34,6 +61,8 @@ function LoginPage() {
             <input
               className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
