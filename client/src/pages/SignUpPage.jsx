@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -29,6 +29,14 @@ function SignUpPage() {
         }
       });
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   return (
     <main className="p-2 flex flex-col gap-10 md:gap-0 h-screen">

@@ -1,6 +1,17 @@
-import { Link } from "react-router";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router";
 
 function Onboarding() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
     <main className="p-2 flex flex-col h-screen">
       <header>
@@ -23,9 +34,12 @@ function Onboarding() {
           >
             Sign Up
           </Link>
-          <button className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm text-center cursor-pointer">
+          <Link
+            to="/login"
+            className="w-30 bg-primary-button text-primary-button-text text-lg md:text-xl font-semibold py-2 px-4 rounded-sm text-center cursor-pointer"
+          >
             Login
-          </button>
+          </Link>
         </div>
       </div>
     </main>
