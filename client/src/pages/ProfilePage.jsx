@@ -53,7 +53,7 @@ function ProfilePage() {
                 className={`${location.pathname === item.route ? "bg-primary-button hover:bg-primary-button/90 text-primary-button-text" : "bg-white/8 hover:bg-white/10 backdrop-blur-xl w-10"} font-semibold h-10 flex items-center justify-center rounded-full cursor-pointer overflow-hidden`}
               >
                 <Link
-                  className="h-full w-full flex items-center gap-2 px-2"
+                  className="h-full w-full flex items-center justify-center gap-2 px-2"
                   to={item.route}
                 >
                   {item.icon}

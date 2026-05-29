@@ -20,7 +20,7 @@ function GroupsList() {
                 </div>
               </div>
 
-              <Link className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-lg md:text-xl p-2 font-semibold rounded-sm cursor-pointer">
+              <Link className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
                 Chat
               </Link>
             </div>

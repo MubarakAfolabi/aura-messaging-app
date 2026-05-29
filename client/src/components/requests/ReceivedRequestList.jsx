@@ -18,11 +18,11 @@ function ReceivedRequestList() {
               </div>
 
               <div className="flex items-center gap-4">
-                <Link className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-lg md:text-xl p-2 font-semibold rounded-sm cursor-pointer">
+                <Link className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
                   Accept
                 </Link>
 
-                <Link className="bg-white/8 backdrop-blur-xl text-lg md:text-xl p-2 font-semibold rounded-sm cursor-pointer">
+                <Link className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
                   Decline
                 </Link>
               </div>

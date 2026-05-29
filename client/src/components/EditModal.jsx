@@ -5,7 +5,7 @@ import UsernameEditForm from "./profile/UsernameEditForm";
 function EditModal({ setModal, modalType }) {
   return (
     <div
-      className="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-md z-20 flex items-center justify-center"
+      className="fixed top-0 left-0 bottom-0 right-0 backdrop-blur-md z-20 flex items-center justify-center px-2"
       role="dialog"
       onClick={() => setModal(false)}
     >

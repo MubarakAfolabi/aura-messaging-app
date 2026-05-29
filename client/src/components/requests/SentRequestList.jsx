@@ -17,7 +17,7 @@ function SentRequestList() {
                 {item.username}
               </div>
 
-              <Link className="bg-white/8 backdrop-blur-xl text-lg md:text-xl p-2 font-semibold rounded-sm cursor-pointer">
+              <Link className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
                 Cancel
               </Link>
             </div>
