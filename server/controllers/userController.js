@@ -10,6 +10,15 @@ const validateUsername = [
     .withMessage("Username must be between 4 and 12 characters"),
 ];
 
+const validateBio = [
+  body("bio")
+    .trim()
+    .notEmpty()
+    .withMessage("Share a little about yourself")
+    .isLength({ max: 160 })
+    .withMessage("Bio cannot exceed 160 characters"),
+];
+
 const updateUsernamePost = [
   validateUsername,
   async (req, res) => {
@@ -38,4 +47,32 @@ const updateUsernamePost = [
   },
 ];
 
-module.exports = { updateUsernamePost };
+const updateBioPost = [
+  validateBio,
+  async (req, res) => {
+    const id = req.user.id;
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        const firstError = errors.array();
+        return res
+          .status(400)
+          .json({ success: false, message: firstError[0].msg });
+      }
+
+      const { bio } = matchedData(req);
+
+      const user = await queries.updateBioById(id, bio);
+      return res.status(200).json({
+        success: true,
+        user,
+        message: "Username updated successfully",
+      });
+    } catch (err) {
+      return res.status(400).json({ success: false, message: err.message });
+    }
+  },
+];
+
+module.exports = { updateUsernamePost, updateBioPost };
