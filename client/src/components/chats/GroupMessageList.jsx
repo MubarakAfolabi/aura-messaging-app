@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { groupMessages } from "../constants/groupMessages";
+import { groupMessages } from "../../constants/groupMessages";
 
 function GroupMessageList() {
   return (

@@ -1,4 +1,4 @@
-import { directMessages } from "../constants/directMessages";
+import { directMessages } from "../../constants/directMessages";
 import { Link } from "react-router";
 
 function DirectMessageList() {

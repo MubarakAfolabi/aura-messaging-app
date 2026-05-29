@@ -1,7 +1,7 @@
 import { MessageCircle, Users } from "lucide-react";
 import { Link, Outlet, useLocation, useOutletContext } from "react-router";
-import DirectMessageList from "../components/DirectMessageList";
-import GroupMessageList from "../components/GroupMessageList";
+import DirectMessageList from "../components/chats/DirectMessageList";
+import GroupMessageList from "../components/chats/GroupMessageList";
 
 function ChatsPage() {
   const location = useLocation();

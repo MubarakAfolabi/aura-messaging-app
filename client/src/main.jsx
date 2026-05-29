@@ -7,13 +7,13 @@ import Onboarding from "./pages/Onboarding.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
-import AccountSettings from "./components/AccountSettings.jsx";
-import FriendsList from "./components/FriendsList.jsx";
-import GroupsList from "./components/GroupsList.jsx";
+import AccountSettings from "./components/profile/AccountSettings.jsx";
+import FriendsList from "./components/profile/FriendsList.jsx";
+import GroupsList from "./components/profile/GroupsList.jsx";
 import ProfileEdit from "./pages/ProfileEdit.jsx";
 import SecurityPage from "./pages/SecurityPage.jsx";
 import ChatsPage from "./pages/ChatsPage.jsx";
-import ChatWindow from "./components/ChatWindow.jsx";
+import ChatWindow from "./components/chats/ChatWindow.jsx";
 import RequestsPage from "./pages/RequestsPage.jsx";
 
 const router = createBrowserRouter([

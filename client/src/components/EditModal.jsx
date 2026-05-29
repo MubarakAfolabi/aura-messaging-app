@@ -1,6 +1,6 @@
-import BioEditForm from "./BioEditForm";
-import PasswordUpdateForm from "./PasswordUpdateForm";
-import UsernameEditForm from "./UsernameEditForm";
+import BioEditForm from "./profile/BioEditForm";
+import PasswordUpdateForm from "./profile/PasswordUpdateForm";
+import UsernameEditForm from "./profile/UsernameEditForm";
 
 function EditModal({ setModal, modalType }) {
   return (
