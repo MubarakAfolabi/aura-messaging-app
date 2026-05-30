@@ -25,7 +25,7 @@ const validatePassword = [
     .isLength({ min: 6 })
     .withMessage("Password must be atleast 6 characters long"),
   body("confirmNewPassword").custom((value, { req }) => {
-    if (value !== req.body.password) {
+    if (value !== req.body.newPassword) {
       throw new Error("Password do not match");
     }
     return true;
@@ -112,7 +112,9 @@ const changeUserPasswordPost = [
       }
 
       const { newPassword } = matchedData(req);
-      await queries.changeUserPassword(id, newPassword);
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      await queries.changeUserPassword(id, hashedPassword);
 
       return res
         .status(200)
