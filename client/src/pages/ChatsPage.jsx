@@ -104,7 +104,13 @@ function ChatsPage() {
             <span className="hidden md:block">Add User</span>
           </button>
         ) : (
-          <button className="flex gap-2 items-center bg-primary-button hover:bg-primary-button/90 text-primary-button-text w-fit p-2 rounded-md self-end cursor-pointer">
+          <button
+            className="flex gap-2 items-center bg-primary-button hover:bg-primary-button/90 text-primary-button-text w-fit p-2 rounded-md self-end cursor-pointer"
+            onClick={() => {
+              setModal(true);
+              setModalType("Group");
+            }}
+          >
             <Users size={22} />
             <span className="hidden md:block">Create Group</span>
           </button>

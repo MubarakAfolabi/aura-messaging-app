@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-function AddUserForm({ setModal }) {
-  const [userEmail, setUserEmail] = useState("");
+function CreateGroupForm({ setModal }) {
+  const [groupName, setGroupName] = useState("");
   const [responseData, setResponseData] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
   return (
     <>
       {!responseData?.success ? (
@@ -20,10 +19,10 @@ function AddUserForm({ setModal }) {
         <div className="flex flex-col gap-2">
           <input
             className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
-            type="email"
-            placeholder="Email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
+            type="text"
+            placeholder="Group Name"
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
           />
         </div>
 
@@ -47,4 +46,4 @@ function AddUserForm({ setModal }) {
   );
 }
 
-export default AddUserForm;
+export default CreateGroupForm;
