@@ -67,7 +67,7 @@ const updateBioPost = [
       return res.status(200).json({
         success: true,
         user,
-        message: "Username updated successfully",
+        message: "Bio updated successfully",
       });
     } catch (err) {
       return res.status(400).json({ success: false, message: err.message });
