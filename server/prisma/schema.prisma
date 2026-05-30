@@ -20,4 +20,25 @@ model User {
   password  String
   bio       String?
   createdAt DateTime @default(now())
+
+  friendsAdded    Friendship[] @relation("UserFriends")
+  friendsReceived Friendship[] @relation("FriendUser")
+}
+
+model Friendship {
+  id        Int              @id @default(autoincrement())
+  status    FriendshipStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+
+  userId   Int
+  friendId Int
+  user     User @relation("UserFriends", fields: [userId], references: [id])
+  friend   User @relation("FriendUser", fields: [friendId], references: [id])
+
+  @@unique([userId, friendId])
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
 }
