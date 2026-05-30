@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import EditModal from "../components/EditModal";
+import Modal from "../components/Modal";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
@@ -17,7 +17,7 @@ function SecurityPage() {
 
   return (
     <div className="flex flex-col gap-5 p-2">
-      {modal && <EditModal setModal={setModal} modalType={modalType} />}
+      {modal && <Modal setModal={setModal} modalType={modalType} />}
 
       <div className="relative">
         <button

@@ -1,14 +1,17 @@
-import { MessageCircle, Users } from "lucide-react";
+import { MessageCircle, Users, UserPlus } from "lucide-react";
 import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import DirectMessageList from "../components/chats/DirectMessageList";
 import GroupMessageList from "../components/chats/GroupMessageList";
 import { directMessages } from "../constants/directMessages";
 import { groupMessages } from "../constants/groupMessages";
 import { useState } from "react";
+import Modal from "../components/Modal";
 
 function ChatsPage() {
   const location = useLocation();
   const [search, setSearch] = useState("");
+  const [modal, setModal] = useState(false);
+  const [modalType, setModalType] = useState(null);
 
   const navArr = [
     {
@@ -48,6 +51,8 @@ function ChatsPage() {
 
   return (
     <div className="overflow-hidden flex md:gap-4 h-full">
+      {modal && <Modal setModal={setModal} modalType={modalType} />}
+
       <div
         className={`flex flex-col flex-1 gap-5 p-2 ${
           isChatOpen ? "hidden lg:flex" : ""
@@ -87,6 +92,23 @@ function ChatsPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+        {isDirect ? (
+          <button
+            className="flex gap-2 items-center bg-primary-button hover:bg-primary-button/90 text-primary-button-text w-fit p-2 rounded-md self-end cursor-pointer"
+            onClick={() => {
+              setModal(true);
+              setModalType("User");
+            }}
+          >
+            <UserPlus size={22} />
+            <span className="hidden md:block">Add User</span>
+          </button>
+        ) : (
+          <button className="flex gap-2 items-center bg-primary-button hover:bg-primary-button/90 text-primary-button-text w-fit p-2 rounded-md self-end cursor-pointer">
+            <Users size={22} />
+            <span className="hidden md:block">Create Group</span>
+          </button>
+        )}
 
         {filteredMessages.length === 0 ? (
           <p className="text-center">No results</p>

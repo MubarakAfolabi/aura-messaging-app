@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditModal from "../components/EditModal";
+import Modal from "../components/Modal";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -19,7 +19,7 @@ function ProfileEdit() {
 
   return (
     <div className="flex flex-col gap-5 p-2 bg-[hsl(30,20%,8%)] h-full rounded-md">
-      {modal && <EditModal setModal={setModal} modalType={modalType} />}
+      {modal && <Modal setModal={setModal} modalType={modalType} />}
 
       <div className="relative">
         <button
