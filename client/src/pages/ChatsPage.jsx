@@ -2,9 +2,14 @@ import { MessageCircle, Users } from "lucide-react";
 import { Link, Outlet, useLocation, useOutletContext } from "react-router";
 import DirectMessageList from "../components/chats/DirectMessageList";
 import GroupMessageList from "../components/chats/GroupMessageList";
+import { directMessages } from "../constants/directMessages";
+import { groupMessages } from "../constants/groupMessages";
+import { useState } from "react";
 
 function ChatsPage() {
   const location = useLocation();
+  const [search, setSearch] = useState("");
+
   const navArr = [
     {
       name: "Direct",
@@ -26,6 +31,20 @@ function ChatsPage() {
   const isChatOpen =
     /^\/chats\/direct\/[^/]+$/.test(location.pathname) ||
     /^\/chats\/groups\/[^/]+$/.test(location.pathname);
+
+  const messages = isDirect ? directMessages : groupMessages;
+
+  const filteredMessages = messages.filter((message) => {
+    return isDirect
+      ? message.username.toLowerCase().includes(search.trim().toLowerCase()) ||
+          message.lastMessage
+            .toLowerCase()
+            .includes(search.trim().toLowerCase())
+      : message.groupName.toLowerCase().includes(search.trim().toLowerCase()) ||
+          message.lastMessage
+            .toLowerCase()
+            .includes(search.trim().toLowerCase());
+  });
 
   return (
     <div className="overflow-hidden flex md:gap-4 h-full">
@@ -59,10 +78,24 @@ function ChatsPage() {
           </ul>
         </nav>
 
-        <div className="flex-1 overflow-hidden">
-          {isDirect && <DirectMessageList />}
-          {isGroups && <GroupMessageList />}
+        <div>
+          <input
+            className="w-full bg-white/8 backdrop-blur-xl p-2 rounded-sm outline-none md:text-lg "
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
+
+        {filteredMessages.length === 0 ? (
+          <p className="text-center">No results</p>
+        ) : (
+          <div className="flex-1 overflow-hidden">
+            {isDirect && <DirectMessageList messages={filteredMessages} />}
+            {isGroups && <GroupMessageList messages={filteredMessages} />}
+          </div>
+        )}
       </div>
 
       {!isChatOpen && !isChatOpen && (

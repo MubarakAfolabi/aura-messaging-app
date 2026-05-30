@@ -1,10 +1,9 @@
 import { Link } from "react-router";
-import { groupMessages } from "../../constants/groupMessages";
 
-function GroupMessageList() {
+function GroupMessageList({ messages }) {
   return (
     <ul className="bg-white/8 backdrop-blur-xl flex flex-col rounded-md overflow-hidden">
-      {groupMessages.map((item, index) => {
+      {messages.map((item, index) => {
         return (
           <li
             key={item.id}
@@ -26,9 +25,7 @@ function GroupMessageList() {
               </div>
             </Link>
 
-            {index < groupMessages.length - 1 && (
-              <hr className="border-secondary" />
-            )}
+            {index < messages.length - 1 && <hr className="border-secondary" />}
           </li>
         );
       })}

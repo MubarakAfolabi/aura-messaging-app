@@ -1,10 +1,9 @@
-import { directMessages } from "../../constants/directMessages";
 import { Link } from "react-router";
 
-function DirectMessageList() {
+function DirectMessageList({ messages }) {
   return (
     <ul className="bg-white/8 backdrop-blur-xl flex flex-col rounded-md overflow-hidden">
-      {directMessages.map((item, index) => {
+      {messages.map((item, index) => {
         return (
           <li
             key={item.id}
@@ -26,9 +25,7 @@ function DirectMessageList() {
               </div>
             </Link>
 
-            {index < directMessages.length - 1 && (
-              <hr className="border-secondary" />
-            )}
+            {index < messages.length - 1 && <hr className="border-secondary" />}
           </li>
         );
       })}
