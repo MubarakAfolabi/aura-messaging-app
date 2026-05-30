@@ -27,15 +27,19 @@ function UsernameEditForm({ setModal }) {
 
         if (data?.success) {
           setUserData((prev) => ({ ...prev, username: data?.user.username }));
-          setModal(false);
+          setTimeout(() => {
+            setModal(false);
+          }, 1000);
         }
       });
   };
 
   return (
     <>
-      {!responseData?.success && (
+      {!responseData?.success ? (
         <p className="text-red-500 text-center">{responseData?.message}</p>
+      ) : (
+        <p className="text-center">{responseData?.message}</p>
       )}
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
