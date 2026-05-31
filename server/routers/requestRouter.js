@@ -19,4 +19,10 @@ requestRouter.patch(
   requestController.acceptedRequestPatch,
 );
 
+requestRouter.delete(
+  "/request/delete",
+  auth,
+  requestController.deleteRequestDelete,
+);
+
 module.exports = requestRouter;
