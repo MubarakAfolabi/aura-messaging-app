@@ -55,6 +55,7 @@ const receivedRequestsGet = async (req, res) => {
 const acceptedRequestPatch = async (req, res) => {
   try {
     const { requestId } = req.body;
+
     const acceptedRequest = await queries.acceptRequest(requestId);
     return res
       .status(200)

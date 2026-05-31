@@ -140,7 +140,7 @@ const acceptRequest = async (requestId) => {
       status: "ACCEPTED",
     },
   });
-  return acceptRequest;
+  return acceptedRequest;
 };
 
 const deleteRequest = async (requestId) => {

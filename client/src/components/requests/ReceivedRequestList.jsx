@@ -4,10 +4,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 function ReceivedRequestList() {
   const [receivedRequests, setReceivedRequests] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     fetch(`${API_URL}/request/received`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -20,11 +19,32 @@ function ReceivedRequestList() {
           setReceivedRequests(data?.receivedRequests);
         }
       });
-  }, []);
+  }, [token]);
+
+  const handleAcceptRequest = (requestId) => {
+    fetch(`${API_URL}/request/accept`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ requestId }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data?.success) {
+          setReceivedRequests((prev) =>
+            prev.filter((item) => item.id !== requestId),
+          );
+        }
+      });
+  };
 
   return (
     <>
-      {receivedRequests.length > 0 ? (
+      {receivedRequests?.length > 0 ? (
         <ul className="bg-white/8 backdrop-blur-xl flex flex-col rounded-md overflow-hidden">
           {receivedRequests.map((item, index) => {
             return (
@@ -41,9 +61,12 @@ function ReceivedRequestList() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <Link className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
+                    <button
+                      className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer"
+                      onClick={() => handleAcceptRequest(item?.id)}
+                    >
                       Accept
-                    </Link>
+                    </button>
 
                     <Link className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
                       Decline
