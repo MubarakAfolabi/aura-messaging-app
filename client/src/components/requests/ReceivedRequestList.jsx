@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function ReceivedRequestList() {
@@ -24,6 +23,27 @@ function ReceivedRequestList() {
   const handleAcceptRequest = (requestId) => {
     fetch(`${API_URL}/request/accept`, {
       method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ requestId }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data?.success) {
+          setReceivedRequests((prev) =>
+            prev.filter((item) => item.id !== requestId),
+          );
+        }
+      });
+  };
+
+  const handleDeleteRequest = (requestId) => {
+    fetch(`${API_URL}/request/delete`, {
+      method: "DELETE",
       headers: {
         "content-type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -68,9 +88,12 @@ function ReceivedRequestList() {
                       Accept
                     </button>
 
-                    <Link className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
+                    <button
+                      className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer"
+                      onClick={() => handleDeleteRequest(item?.id)}
+                    >
                       Decline
-                    </Link>
+                    </button>
                   </div>
                 </div>
 

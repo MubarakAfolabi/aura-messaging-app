@@ -68,11 +68,10 @@ const acceptedRequestPatch = async (req, res) => {
 const deleteRequestDelete = async (req, res) => {
   try {
     const { requestId } = req.body;
-
-    const deletedRequest = await queries.deletedRequest(requestId);
+    const deletedRequest = await queries.deleteRequest(requestId);
     return res
       .status(200)
-      .json({ success: true, deletedRequest, message: "Request Accepted" });
+      .json({ success: true, deletedRequest, message: "Request Deleted" });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }

@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function SentRequestList() {
   const [sentRequests, setSentRequests] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     fetch(`${API_URL}/request/sent`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
@@ -16,12 +14,32 @@ function SentRequestList() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         if (data?.success) {
           setSentRequests(data?.sentRequests);
         }
       });
-  }, []);
+  }, [token]);
+
+  const handleDeleteRequest = (requestId) => {
+    fetch(`${API_URL}/request/delete`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ requestId }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (data?.success) {
+          setSentRequests((prev) =>
+            prev.filter((item) => item.id !== requestId),
+          );
+        }
+      });
+  };
 
   return (
     <>
@@ -41,9 +59,12 @@ function SentRequestList() {
                     {item.friend?.username}
                   </div>
 
-                  <Link className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
+                  <button
+                    className="bg-white/8 hover:bg-white/10 backdrop-blur-xl text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer"
+                    onClick={() => handleDeleteRequest(item?.id)}
+                  >
                     Cancel
-                  </Link>
+                  </button>
                 </div>
 
                 {index < sentRequests.length - 1 && (
