@@ -33,7 +33,7 @@ const validatePassword = [
 ];
 
 const validateEmail = [
-  body("email")
+  body("userEmail")
     .isEmail()
     .withMessage("Please enter a valid email")
     .normalizeEmail(),
@@ -145,9 +145,9 @@ const findUsersByEmailPost = [
           .json({ success: false, message: firstError[0].msg });
       }
 
-      const { email } = matchedData(req);
+      const { userEmail } = matchedData(req);
 
-      const user = await queries.findUserByEmail(email);
+      const user = await queries.findUserByEmail(userEmail);
 
       if (!user) {
         return res
@@ -155,7 +155,15 @@ const findUsersByEmailPost = [
           .json({ success: false, message: "User does not exist" });
       }
 
-      return res.status(200).json({ success: true, user });
+      if (user.email === req.user.email) {
+        return res
+          .status(400)
+          .json({ success: false, message: "That's your email" });
+      }
+
+      const { id, username, email } = user;
+
+      return res.status(200).json({ success: true, user: { username, email } });
     } catch (err) {
       return res.status(400).json({ success: false, message: err.message });
     }
