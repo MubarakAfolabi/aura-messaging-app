@@ -131,6 +131,27 @@ const requestsReceived = async (userId) => {
   return receivedRequests;
 };
 
+const acceptRequest = async (requestId) => {
+  const acceptedRequest = await prisma.friendship.update({
+    where: {
+      id: requestId,
+    },
+    data: {
+      status: "ACCEPTED",
+    },
+  });
+  return acceptRequest;
+};
+
+const deleteRequest = async (requestId) => {
+  const deletedRequest = await prisma.friendship.delete({
+    where: {
+      id: requestId,
+    },
+  });
+  return deletedRequest;
+};
+
 module.exports = {
   findUserById,
   createUser,
@@ -142,4 +163,6 @@ module.exports = {
   existingRequest,
   requestsSent,
   requestsReceived,
+  acceptRequest,
+  deleteRequest,
 };
