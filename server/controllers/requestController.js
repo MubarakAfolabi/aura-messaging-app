@@ -52,8 +52,21 @@ const receivedRequestsGet = async (req, res) => {
   }
 };
 
+const acceptedRequestPatch = async (req, res) => {
+  try {
+    const { requestId } = req.body;
+    const acceptedRequest = await queries.acceptRequest(requestId);
+    return res
+      .status(200)
+      .json({ success: true, acceptedRequest, message: "Request Accepted" });
+  } catch (err) {
+    return res.status(400).json({ success: false, message: err.message });
+  }
+};
+
 module.exports = {
   sendFriendRequestPost,
   sentRequestsGet,
   receivedRequestsGet,
+  acceptedRequestPatch,
 };

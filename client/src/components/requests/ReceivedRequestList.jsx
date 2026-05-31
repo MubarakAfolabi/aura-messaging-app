@@ -16,7 +16,9 @@ function ReceivedRequestList() {
         return response.json();
       })
       .then((data) => {
-        setReceivedRequests(data?.receivedRequests);
+        if (data?.success) {
+          setReceivedRequests(data?.receivedRequests);
+        }
       });
   }, []);
 

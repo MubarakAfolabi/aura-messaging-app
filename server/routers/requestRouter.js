@@ -13,4 +13,10 @@ requestRouter.get(
   requestController.receivedRequestsGet,
 );
 
+requestRouter.patch(
+  "/request/accept",
+  auth,
+  requestController.acceptedRequestPatch,
+);
+
 module.exports = requestRouter;

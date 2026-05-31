@@ -16,7 +16,10 @@ function SentRequestList() {
         return response.json();
       })
       .then((data) => {
-        setSentRequests(data?.sentRequests);
+        console.log(data);
+        if (data?.success) {
+          setSentRequests(data?.sentRequests);
+        }
       });
   }, []);
 
