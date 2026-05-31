@@ -32,6 +32,13 @@ const validatePassword = [
   }),
 ];
 
+const validateEmail = [
+  body("email")
+    .isEmail()
+    .withMessage("Please enter a valid email")
+    .normalizeEmail(),
+];
+
 const updateUsernamePost = [
   validateUsername,
   async (req, res) => {
@@ -125,4 +132,39 @@ const changeUserPasswordPost = [
   },
 ];
 
-module.exports = { updateUsernamePost, updateBioPost, changeUserPasswordPost };
+const findUsersByEmailPost = [
+  validateEmail,
+  async (req, res) => {
+    try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        const firstError = errors.array();
+        return res
+          .status(400)
+          .json({ success: false, message: firstError[0].msg });
+      }
+
+      const { email } = matchedData(req);
+
+      const user = await queries.findUserByEmail(email);
+
+      if (!user) {
+        return res
+          .status(400)
+          .json({ success: false, message: "User does not exist" });
+      }
+
+      return res.status(200).json({ success: true, user });
+    } catch (err) {
+      return res.status(400).json({ success: false, message: err.message });
+    }
+  },
+];
+
+module.exports = {
+  updateUsernamePost,
+  updateBioPost,
+  changeUserPasswordPost,
+  findUsersByEmailPost,
+};

@@ -11,4 +11,7 @@ userRouter.patch(
   userController.changeUserPasswordPost,
 );
 
+// find users by email
+userRouter.post("/users/search", auth, userController.findUsersByEmailPost);
+
 module.exports = userRouter;
