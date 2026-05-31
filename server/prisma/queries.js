@@ -94,7 +94,7 @@ const existingRequest = async (userId, friendId) => {
 };
 
 const requestsSent = async (userId) => {
-  const sentRequest = await prisma.friendship.findMany({
+  const sentRequests = await prisma.friendship.findMany({
     where: {
       userId,
       status: "PENDING",
@@ -109,7 +109,26 @@ const requestsSent = async (userId) => {
       },
     },
   });
-  return sentRequest;
+  return sentRequests;
+};
+
+const requestsReceived = async (userId) => {
+  const receivedRequests = await prisma.friendship.findMany({
+    where: {
+      friendId: userId,
+      status: "PENDING",
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+        },
+      },
+    },
+  });
+  return receivedRequests;
 };
 
 module.exports = {
@@ -122,4 +141,5 @@ module.exports = {
   sendFriendRequest,
   existingRequest,
   requestsSent,
+  requestsReceived,
 };
