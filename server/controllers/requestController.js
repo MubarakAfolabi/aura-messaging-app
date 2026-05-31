@@ -42,4 +42,18 @@ const sentRequestsGet = async (req, res) => {
   }
 };
 
-module.exports = { sendFriendRequestPost, sentRequestsGet };
+const receivedRequestsGet = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const receivedRequests = await queries.requestsReceived(userId);
+    return res.status(200).json({ success: true, receivedRequests });
+  } catch (err) {
+    return res.status(400).json({ success: false, message: err.message });
+  }
+};
+
+module.exports = {
+  sendFriendRequestPost,
+  sentRequestsGet,
+  receivedRequestsGet,
+};

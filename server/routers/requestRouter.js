@@ -7,4 +7,10 @@ requestRouter.post("/request", auth, requestController.sendFriendRequestPost);
 
 requestRouter.get("/request/sent", auth, requestController.sentRequestsGet);
 
+requestRouter.get(
+  "/request/received",
+  auth,
+  requestController.receivedRequestsGet,
+);
+
 module.exports = requestRouter;
