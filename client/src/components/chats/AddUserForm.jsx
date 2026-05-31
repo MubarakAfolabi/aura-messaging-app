@@ -39,7 +39,7 @@ function AddUserForm({ setModal }) {
             className="flex-1 bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-lg md:text-xl py-2 font-semibold rounded-sm cursor-pointer"
             type="submit"
           >
-            Add
+            Search
           </button>
         </div>
       </form>
