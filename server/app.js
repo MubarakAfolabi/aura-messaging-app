@@ -5,6 +5,7 @@ const passport = require("./configs/passport.js");
 const auth = require("./middleware/auth.js");
 const authRouter = require("./routers/authRouter.js");
 const userRouter = require("./routers/userRouter.js");
+const requestRouter = require("./routers/requestRouter.js");
 const app = express();
 
 app.use(cors());
@@ -14,6 +15,7 @@ app.use(passport.initialize());
 
 app.use("/api", authRouter);
 app.use("/api", userRouter);
+app.use("/api", requestRouter);
 
 app.get("/api/profile", auth, (req, res) => {
   return res.json({ user: req.user });
