@@ -163,7 +163,9 @@ const findUsersByEmailPost = [
 
       const { id, username, email } = user;
 
-      return res.status(200).json({ success: true, user: { username, email } });
+      return res
+        .status(200)
+        .json({ success: true, user: { id, username, email } });
     } catch (err) {
       return res.status(400).json({ success: false, message: err.message });
     }

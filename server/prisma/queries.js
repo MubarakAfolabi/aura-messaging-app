@@ -75,6 +75,24 @@ const sendFriendRequest = async (senderId, receiverId) => {
   return request;
 };
 
+const existingRequest = async (userId, friendId) => {
+  const request = await prisma.friendship.findFirst({
+    where: {
+      OR: [
+        {
+          userId: userId,
+          friendId: friendId,
+        },
+        {
+          userId: friendId,
+          friendId: userId,
+        },
+      ],
+    },
+  });
+  return request;
+};
+
 module.exports = {
   findUserById,
   createUser,
@@ -83,4 +101,5 @@ module.exports = {
   updateBioById,
   changeUserPassword,
   sendFriendRequest,
+  existingRequest,
 };

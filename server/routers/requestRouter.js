@@ -3,10 +3,6 @@ const requestRouter = Router();
 const requestController = require("../controllers/requestController.js");
 const auth = require("../middleware/auth.js");
 
-requestRouter.post(
-  "/request/send",
-  auth,
-  requestController.sendFriendRequestPost,
-);
+requestRouter.post("/request", auth, requestController.sendFriendRequestPost);
 
 module.exports = requestRouter;

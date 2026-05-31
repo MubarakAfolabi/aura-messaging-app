@@ -5,6 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 function AddUserForm({ setModal }) {
   const [userEmail, setUserEmail] = useState("");
   const [responseData, setResponseData] = useState(null);
+  const [friend, setFriend] = useState(null);
   const token = localStorage.getItem("token");
 
   const handleSubmit = (e) => {
@@ -23,13 +24,36 @@ function AddUserForm({ setModal }) {
       })
       .then((data) => {
         setResponseData(data);
+
+        if (data?.success) {
+          setFriend(data?.user);
+        }
+      });
+  };
+
+  const handleSendRequest = () => {
+    fetch(`${API_URL}/request`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ friendId: friend.id }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setResponseData(data);
       });
   };
 
   return (
     <div className="flex flex-col gap-4">
-      {!responseData?.success && (
+      {!responseData?.success ? (
         <p className="text-red-500 text-center">{responseData?.message}</p>
+      ) : (
+        <p className="text-center">{responseData?.message}</p>
       )}
 
       <form onSubmit={handleSubmit}>
@@ -51,23 +75,24 @@ function AddUserForm({ setModal }) {
         </div>
       </form>
 
-      {responseData?.success && (
+      {friend && (
         <ul>
           <li className="font-semibold rounded-sm flex flex-col">
             <div className="flex items-center justify-between p-4">
               <div className="flex items-center gap-2">
                 <div className="font-bold w-10 h-10 rounded-full bg-green-400 flex items-center justify-center">
-                  {responseData.user?.username.charAt(0)}
+                  {friend.username.charAt(0)}
                 </div>
                 <div>
-                  <h2>{responseData.user?.username}</h2>
-                  <p className="text-sm text-secondary">
-                    {responseData.user?.email}
-                  </p>
+                  <h2>{friend.username}</h2>
+                  <p className="text-sm text-secondary">{friend.email}</p>
                 </div>
               </div>
 
-              <button className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer">
+              <button
+                className="bg-primary-button hover:bg-primary-button/90 text-primary-button-text text-md md:text-lg p-2 font-semibold rounded-sm cursor-pointer"
+                onClick={handleSendRequest}
+              >
                 Add
               </button>
             </div>
@@ -80,7 +105,7 @@ function AddUserForm({ setModal }) {
         type="button"
         onClick={() => setModal(false)}
       >
-        Cancel
+        Close
       </button>
     </div>
   );
