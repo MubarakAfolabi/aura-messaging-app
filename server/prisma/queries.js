@@ -93,6 +93,25 @@ const existingRequest = async (userId, friendId) => {
   return request;
 };
 
+const requestsSent = async (userId) => {
+  const sentRequest = await prisma.friendship.findMany({
+    where: {
+      userId,
+      status: "PENDING",
+    },
+    include: {
+      friend: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+        },
+      },
+    },
+  });
+  return sentsRequest;
+};
+
 module.exports = {
   findUserById,
   createUser,
@@ -102,4 +121,5 @@ module.exports = {
   changeUserPassword,
   sendFriendRequest,
   existingRequest,
+  requestSent,
 };
