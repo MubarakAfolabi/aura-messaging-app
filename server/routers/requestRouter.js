@@ -5,4 +5,6 @@ const auth = require("../middleware/auth.js");
 
 requestRouter.post("/request", auth, requestController.sendFriendRequestPost);
 
+requestRouter.get("/request/sent", auth, requestController.sentRequestsGet);
+
 module.exports = requestRouter;

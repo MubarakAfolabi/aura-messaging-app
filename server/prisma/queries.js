@@ -109,7 +109,7 @@ const requestsSent = async (userId) => {
       },
     },
   });
-  return sentsRequest;
+  return sentRequest;
 };
 
 module.exports = {
@@ -121,5 +121,5 @@ module.exports = {
   changeUserPassword,
   sendFriendRequest,
   existingRequest,
-  requestSent,
+  requestsSent,
 };
