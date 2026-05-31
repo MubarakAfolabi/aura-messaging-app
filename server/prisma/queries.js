@@ -65,6 +65,16 @@ const changeUserPassword = async (id, password) => {
   return user;
 };
 
+const sendFriendRequest = async (senderId, receiverId) => {
+  const request = await prisma.friendship.create({
+    data: {
+      userId: senderId,
+      friendId: receiverId,
+    },
+  });
+  return request;
+};
+
 module.exports = {
   findUserById,
   createUser,
@@ -72,4 +82,5 @@ module.exports = {
   updateUsernameById,
   updateBioById,
   changeUserPassword,
+  sendFriendRequest,
 };
