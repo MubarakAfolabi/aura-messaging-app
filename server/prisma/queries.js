@@ -152,6 +152,32 @@ const deleteRequest = async (requestId) => {
   return deletedRequest;
 };
 
+const userFriends = async (userId) => {
+  const friends = await prisma.friendship.findMany({
+    where: {
+      status: "ACCEPTED",
+      OR: [{ userId }, { friendId: userId }],
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+        },
+      },
+      friend: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+        },
+      },
+    },
+  });
+  return friends;
+};
+
 module.exports = {
   findUserById,
   createUser,
@@ -165,4 +191,5 @@ module.exports = {
   requestsReceived,
   acceptRequest,
   deleteRequest,
+  userFriends,
 };
